@@ -4,7 +4,12 @@ class CoolpayRequest
     def initialize(uri)
       @uri = URI.parse(uri)
       @header = {'Content-Type': 'application/json'}
+    end
 
+    def set_http
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http
     end
   end
 
@@ -13,7 +18,7 @@ class CoolpayRequest
   # uri = URI.parse("https://coolpay.herokuapp.com/api/login")
   # header = {'Content-Type': 'application/json'}
   # credentials = {
-  #     "username": 
+  #     "username":
   #     "apikey":
   # }
   # http = Net::HTTP.new(uri.host, uri.port)
