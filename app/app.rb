@@ -13,8 +13,8 @@ class Coolpay < Sinatra::Base
     uri = URI.parse("https://coolpay.herokuapp.com/api/login")
     header = {'Content-Type': 'application/json'}
     credentials = {
-        "username": "emili",
-        "apikey": "FFE74382E8AFA95F"
+        "username": "",
+        "apikey": ""
     }
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
