@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'uri'
 require 'net/http'
 require 'json'
+require 'dotenv/load'
 
 class Coolpay < Sinatra::Base
 
@@ -10,17 +11,14 @@ class Coolpay < Sinatra::Base
   end
 
   post '/users' do
-    uri = URI.parse("https://coolpay.herokuapp.com/api/login")
+    coolpay = CoolpayRequest.new(uri: "https://coolpay.herokuapp.com/api/login")
     header = {'Content-Type': 'application/json'}
     credentials = {
-        "username": "",
-        "apikey": ""
+        "username": ENV['USERNAME'],
+        "apikey": ENV['API_KEY']
     }
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    request = Net::HTTP::Post.new(uri.request_uri, header)
-    request.body = credentials.to_json
-    response = http.request(request)
+    request = coolpay.set_post_request(body: credentials, header: header)
+    response = coolpay.http.request(request)
     p response.body
     redirect to '/payments'
   end
