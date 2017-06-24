@@ -1,13 +1,7 @@
-require './app/models/http_client'
-require './app/models/post_request'
 require './app/models/http_request'
-
 
 describe HTTPRequest do
   let(:login_uri) { "/api/login" }
-  # let(:http) { double(:http, request: 'token') }
-  # # let(:client) { HTTPClient.new(uri: uri)) }
-  # let(:client) { double(:client, get_request_uri: uri, http: http) }
   let(:token) { 'you_are_cool'}
   let(:credentials) { {"username": "your_username", "apikey": "5up3r$ecretKey!"} }
   subject(:post) { described_class.new(type: 'POST', uri: login_uri) }
