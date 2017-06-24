@@ -12,12 +12,11 @@ class Coolpay < Sinatra::Base
 
   post '/users' do
     coolpay = CoolpayRequest.new(uri: "https://coolpay.herokuapp.com/api/login")
-    header = {'Content-Type': 'application/json'}
     credentials = {
         "username": ENV['USERNAME'],
         "apikey": ENV['API_KEY']
     }
-    request = coolpay.set_post_request(body: credentials, header: header)
+    request = coolpay.set_post_request(body: credentials)
     response = coolpay.http.request(request)
     p response.body
     redirect to '/payments'
