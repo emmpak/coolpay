@@ -1,17 +1,9 @@
 class HTTPClient
     attr_reader :uri, :http
 
-    CONTENT_TYPE = {'Content-Type': 'application/json'}
-
     def initialize(uri:)
       @uri = URI.parse(uri)
       @http = set_http_connection
-    end
-
-    def set_post_request(body:)
-      request = Net::HTTP::Post.new(uri.request_uri, CONTENT_TYPE)
-      request.body = body.to_json
-      request
     end
 
     def get_request_uri
