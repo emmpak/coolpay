@@ -7,7 +7,7 @@ describe PostRequest do
   # let(:client) { HTTPClient.new(uri: uri)) }
   let(:client) { double(:client, get_request_uri: uri, http: http) }
   let(:credentials) { {"username": "your_username", "apikey": "5up3r$ecretKey!"} }
-  subject(:post_request) { described_class.new(client: client, credentials: credentials) }
+  subject(:post_request) { described_class.new(client: client, body_message: credentials) }
 
   describe '#send' do
     it 'sends a request' do
@@ -18,7 +18,7 @@ describe PostRequest do
 
   describe('#set') do
     before do
-      @http_request = post_request.set(body: credentials)
+      @http_request = post_request.set(body: credentials, token: nil)
     end
 
     it('creates a post request') do
@@ -31,6 +31,15 @@ describe PostRequest do
 
     it('has the given header') do
       expect(@http_request['content-type'.to_sym]).to eq 'application/json'
+    end
+
+    it('does not have an authorization header') do
+      expect(@http_request['authorization']).to eq nil
+    end
+
+    it('does have an authorization header if token is not nil') do
+      http_request = post_request.set(body: credentials, token: 'abc')
+      expect(http_request['authorization']).to eq 'Bearer abc'
     end
   end
 end
