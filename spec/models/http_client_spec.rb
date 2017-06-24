@@ -1,9 +1,7 @@
-# require 'net/http'
-require './app/models/coolpay_request'
+require './app/models/http_client'
 
-describe CoolpayRequest do
-  let(:uri) { "https://www.google.com" }
-  # let(:header) { {'Content-Type': 'application/json'} }
+describe HTTPClient do
+  let(:uri) { "https://coolpay.herokuapp.com/api/login" }
   let(:credentials) { {"username": "your_username","apikey": "5up3r$ecretKey!"} }
   subject(:request) { described_class.new(uri: uri) }
 
@@ -17,6 +15,12 @@ describe CoolpayRequest do
   describe('#http') do
     it('creates an http objet') do
       expect(request.http).to be_kind_of(Net::HTTP)
+    end
+  end
+
+  describe('#get_request_uri') do
+    it('returns the path') do
+      expect(request.get_request_uri).to eq '/api/login'
     end
   end
 

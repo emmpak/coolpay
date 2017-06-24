@@ -1,4 +1,4 @@
-class CoolpayRequest
+class HTTPClient
     attr_reader :uri, :http
 
     CONTENT_TYPE = {'Content-Type': 'application/json'}
@@ -12,6 +12,10 @@ class CoolpayRequest
       request = Net::HTTP::Post.new(uri.request_uri, CONTENT_TYPE)
       request.body = body.to_json
       request
+    end
+
+    def get_request_uri
+      uri.request_uri
     end
 
     private

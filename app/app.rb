@@ -4,6 +4,9 @@ require 'net/http'
 require 'json'
 require 'dotenv/load'
 
+require_relative 'models/post_request'
+require_relative 'models/http_client'
+
 class Coolpay < Sinatra::Base
 
   get '/' do
@@ -11,13 +14,16 @@ class Coolpay < Sinatra::Base
   end
 
   post '/users' do
-    coolpay = CoolpayRequest.new(uri: "https://coolpay.herokuapp.com/api/login")
-    credentials = {
-        "username": ENV['USERNAME'],
-        "apikey": ENV['API_KEY']
-    }
-    request = coolpay.set_post_request(body: credentials)
-    response = coolpay.http.request(request)
+
+    client = HTTPClient.new(uri: "https://coolpay.herokuapp.com/api/login")
+    response = Login.new(client: client).send_request
+
+    # credentials = {
+    #     "username": ENV['USERNAME'],
+    #     "apikey": ENV['API_KEY']
+    # }
+    # request = coolpay.set_post_request(body: credentials)
+    # response = coolpay.http.request(request)
     p response.body
     redirect to '/payments'
   end
