@@ -6,3 +6,9 @@
       <input type='submit' value='Add Recipient'  />
   </form>
 </div>
+
+<div id='recipients-container'>
+  <% @recipients.each do |recipient| %>
+    <div id='recipient'> <%= recipient['name'] %> </div>
+  <% end %>
+</div>
