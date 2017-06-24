@@ -8,4 +8,7 @@ class Credentials
   def format_json
     { 'username': username, 'apikey': apikey }
   end
+
+  private
+  attr_reader :username, :apikey
 end
