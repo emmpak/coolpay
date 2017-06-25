@@ -1,6 +1,7 @@
 require 'capybara/rspec'
 
 require './app/app'
+require_relative './features/web_helper'
 
 Capybara.app = Coolpay
 

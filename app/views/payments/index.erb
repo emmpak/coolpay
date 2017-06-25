@@ -1,3 +1,14 @@
+<div id='payments-container'>
+  <% @payments.each do |payment| %>
+    <div class='payment'>
+      <div class='status'> Status: <%= payment['status'] %> </div>
+      <div class='amount'> Amount: <%= payment['amount'] %> </div>
+      <div class='currency'> <%= payment['currency'] %> </div>
+      <div class='reference-id'> Reference ID: <%= payment['id'] %> </div>
+    </div>
+  <% end %>
+</div
+
 <div id='add_recipient'>
   <form action='/recipients' method='post'>
     <label for='recipient'>Recipient Name
@@ -8,17 +19,18 @@
 </div>
 
 <div id='recipients-container'>
-  <% @recipients.each do |recipient| %>
-    <div id='recipient'> <%= recipient['name'] %> </div>
-    <form action='/payments' method='post' name='paymentform'>
+  <% @recipients.each_with_index do |recipient, index| %>
+    <div class='recipient'> <%= recipient['name'] %> </div>
+    <form action='/payments' method='post' name="paymentform" id="paymentform-<%= index %>">
       <input type="hidden" name="id" value="<%= recipient['id'] %>">
       <label for='amount'>Amount
         <input type='number' name='amount' required/>
       </label>
-      <select name="currency" form="paymentform" required>
+      <select name="currency" required>
         <option value="GBP">GBP</option>
         <option value="USD">USD</option>
       </select>
+      <input type='submit' value='Send coins' />
     </form>
   <% end %>
 </div>
