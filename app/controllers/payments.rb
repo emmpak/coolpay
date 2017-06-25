@@ -16,13 +16,7 @@ class Coolpay < Sinatra::Base
   post '/payments' do
     client = HTTPClient.new(uri: "https://coolpay.herokuapp.com/api/payments")
     request = HTTPRequest.new(type: 'POST', uri: client.get_request_uri)
-    message = {
-                "payment": {
-                  "amount": params['amount'],
-                  "currency": params['currency'],
-                  "recipient_id": params['id']
-                }
-              }
+    message = Payment.new(amount: params['amount'], currency: params['currency'], id: params['id']).format_json
     response = client.http.request(request.build(message: message, token: token))
     redirect to '/payments'
   end

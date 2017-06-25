@@ -5,7 +5,7 @@ describe Credentials do
   let(:other)  { {"username": "your_username", "apikey": "5up3r$ecretKey!"} }
   subject(:credentials) { described_class.new }
 
-  describe('#format') do
+  describe('#format_json') do
     it('formats the default credentials into json format') do
       expect(credentials.format_json).to eq default
     end
