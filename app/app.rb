@@ -1,8 +1,10 @@
+ENV['RACK_ENV'] ||= 'development'
+
 require 'sinatra/base'
 require 'uri'
 require 'net/http'
 require 'json'
-require 'dotenv/load'
+require 'dotenv/load' if (ENV['RUBY_ENV'] == "development" || ENV['RUBY_ENV'] == "test")
 
 require_relative 'models/credentials'
 require_relative 'models/coolpay_api'

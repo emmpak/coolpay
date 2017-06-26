@@ -1,8 +1,9 @@
+ENV['RACK_ENV'] ='test'
+
+
 require 'capybara/rspec'
 require 'coveralls'
 require 'simplecov'
-
-
 
 require './app/app'
 require_relative './features/web_helper'
