@@ -1,8 +1,8 @@
 require './app/models/http_client'
 
 describe HTTPClient do
-  let(:uri) { "https://coolpay.herokuapp.com/api/login" }
-  subject(:request) { described_class.new(uri: uri) }
+  let(:path) {'login'}
+  subject(:request) { described_class.new(path: path) }
 
 
   describe('#uri') do
@@ -19,7 +19,7 @@ describe HTTPClient do
 
   describe('#get_request_uri') do
     it('returns the path') do
-      expect(request.get_request_uri).to eq '/api/login'
+      expect(request.get_request_uri).to eq "/api/#{path}"
     end
   end
 end
