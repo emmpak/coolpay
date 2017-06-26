@@ -1,8 +1,8 @@
 class HTTPClient
     attr_reader :uri, :http
 
-    def initialize(uri:)
-      @uri = URI.parse(uri)
+    def initialize(path:)
+      @uri = URI.parse("https://coolpay.herokuapp.com/api/#{path}")
       @http = set_http_connection
     end
 

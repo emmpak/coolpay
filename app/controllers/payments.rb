@@ -1,23 +1,19 @@
+require './app/models/payment'
+
 class Coolpay < Sinatra::Base
 
   get '/payments' do
-    client = HTTPClient.new(uri: "https://coolpay.herokuapp.com/api/recipients")
-    request = HTTPRequest.new(type: 'GET', uri: client.get_request_uri)
-    response = client.http.request(request.build(token: token))
-    @recipients = JSON.parse(response.body)['recipients']
+    recipients_response = api.send_request(path: 'recipients', type: 'GET', token: token)
+    @recipients = JSON.parse(recipients_response.body)['recipients']
 
-    client = HTTPClient.new(uri: "https://coolpay.herokuapp.com/api/payments")
-    request = HTTPRequest.new(type: 'GET', uri: client.get_request_uri)
-    response = client.http.request(request.build(token: token))
-    @payments = JSON.parse(response.body)['payments']
+    payments_response = api.send_request(path: 'payments', type: 'GET', token: token)
+    @payments = JSON.parse(payments_response.body)['payments']
     erb :'payments/index'
   end
 
   post '/payments' do
-    client = HTTPClient.new(uri: "https://coolpay.herokuapp.com/api/payments")
-    request = HTTPRequest.new(type: 'POST', uri: client.get_request_uri)
     message = Payment.new(amount: params['amount'], currency: params['currency'], id: params['id']).format_json
-    response = client.http.request(request.build(message: message, token: token))
+    api.send_request(path: 'payments', type: 'POST', token: token, message: message)
     redirect to '/payments'
   end
 end
