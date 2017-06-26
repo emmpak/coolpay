@@ -8,7 +8,10 @@ This is an app that uses [Coolpay](http://docs.coolpayapi.apiary.io/) API. Coolp
 ### Tech
 Ruby, Sinatra, RSpec, Capybara, HTML, CSS
 
-### Setup
+### Live Version
+**[Coolpay](https://coolpay-api.herokuapp.com/)**
+
+### Local Setup
 
 ###### Initial Steps
 
@@ -58,3 +61,9 @@ As a User
 So that I know whether I paid my friend
 I want to able to see the status of my payment
 ```
+
+### Further Improvements
+
+* Add a recipient name to each payment transaction
+* Add signup/login/logout flow
+* Add more currencies 
