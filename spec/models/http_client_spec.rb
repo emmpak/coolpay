@@ -2,7 +2,6 @@ require './app/models/http_client'
 
 describe HTTPClient do
   let(:uri) { "https://coolpay.herokuapp.com/api/login" }
-  let(:credentials) { {"username": "your_username","apikey": "5up3r$ecretKey!"} }
   subject(:request) { described_class.new(uri: uri) }
 
 
