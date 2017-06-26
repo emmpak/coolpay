@@ -1,3 +1,7 @@
+Coolpay
+=================
+[![Build Status](https://travis-ci.org/emmpak/coolpay.svg?branch=master)](https://travis-ci.org/emmpak/coolpay)
+
 ### Setup
 
 ###### Initial Steps
