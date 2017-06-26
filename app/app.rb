@@ -4,11 +4,8 @@ require 'net/http'
 require 'json'
 require 'dotenv/load'
 
-require_relative 'models/http_client'
 require_relative 'models/credentials'
-require_relative 'models/http_request'
-
-
+require_relative 'models/coolpay_api'
 
 class Coolpay < Sinatra::Base
   enable :sessions

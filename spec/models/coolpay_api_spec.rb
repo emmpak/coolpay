@@ -10,6 +10,11 @@ describe CoolpayAPI do
   subject(:api) { described_class.new(http_client_class: http_client_class, http_request_class: http_request_class) }
 
   describe('#login') do
+    it('creates a new client') do
+      expect(http_client_class).to receive(:new)
+      api.login(credentials)
+    end
+
     it('creates a new post http request') do
       expect(http_request_class).to receive(:new).with(type:'POST', uri:'/login')
       api.login(credentials)
