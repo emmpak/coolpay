@@ -11,6 +11,10 @@ class Coolpay < Sinatra::Base
   enable :sessions
 
   helpers do
+    def api
+      @api = CoolpayAPI.new
+    end
+
     def token
       @token ||= session[:token]
     end

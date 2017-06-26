@@ -9,25 +9,30 @@ describe CoolpayAPI do
   let(:credentials) { { "username": "your_username", "apikey": "5up3r$ecretKey!" } }
   subject(:api) { described_class.new(http_client_class: http_client_class, http_request_class: http_request_class) }
 
-  describe('#login') do
+  describe('#send_request') do
     it('creates a new client') do
-      expect(http_client_class).to receive(:new)
-      api.login(credentials)
+      expect(http_client_class).to receive(:new).with(path:'login')
+      api.send_request(path:'login', type:'GET')
     end
 
-    it('creates a new post http request') do
-      expect(http_request_class).to receive(:new).with(type:'POST', uri:'/login')
-      api.login(credentials)
+    it('creates a new http request') do
+      expect(http_request_class).to receive(:new).with(type:'GET', uri:'/login')
+      api.send_request(path:'login', type:'GET')
     end
 
-    it('creates a request containing the credentials') do
-      expect(http_request).to receive(:build).with(message: credentials)
-      api.login(credentials)
+    it('creates a request containing the given message') do
+      expect(http_request).to receive(:build).with(message: credentials, token: nil)
+      api.send_request(path:'login', type:'GET', message: credentials)
+    end
+
+    it('creates a request containing the authorization token') do
+      expect(http_request).to receive(:build).with(message: credentials, token: 'abc')
+      api.send_request(path:'login', type:'GET', message: credentials, token: 'abc')
     end
 
     it('sends the request') do
       expect(http).to receive(:request).with(http_request.build)
-      api.login(credentials)
+      api.send_request(path:'login', type:'GET')
     end
   end
 end

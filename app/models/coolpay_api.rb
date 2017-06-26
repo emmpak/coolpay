@@ -10,9 +10,9 @@ class CoolpayAPI
     @http_request_class = http_request_class
   end
 
-  def login(credentials)
-    client = http_client_class.new(path: 'login')
-    request = http_request_class.new(type: 'POST', uri: client.get_request_uri)
-    client.http.request(request.build(message: credentials))
+  def send_request(path:, type:, message:nil, token:nil)
+    client = http_client_class.new(path: path)
+    request = http_request_class.new(type: type, uri: client.get_request_uri)
+    client.http.request(request.build(message: message, token: token))
   end
 end
