@@ -1,0 +1,9 @@
+
+rvm: '2.4.0'
+
+script:
+  - bundle exec rspec spec
+
+before_install:
+- sed -i '2d' Gemfile
+- sudo apt-get update -qq
