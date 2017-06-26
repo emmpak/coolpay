@@ -1,6 +1,7 @@
 Coolpay
 =================
 [![Build Status](https://travis-ci.org/emmpak/coolpay.svg?branch=master)](https://travis-ci.org/emmpak/coolpay)
+[![Coverage Status](https://coveralls.io/repos/github/emmpak/coolpay/badge.svg?branch=master)](https://coveralls.io/github/emmpak/coolpay?branch=master)
 
 ### Setup
 
