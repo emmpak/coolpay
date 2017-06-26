@@ -3,6 +3,11 @@ Coolpay
 [![Build Status](https://travis-ci.org/emmpak/coolpay.svg?branch=master)](https://travis-ci.org/emmpak/coolpay)
 [![Coverage Status](https://coveralls.io/repos/github/emmpak/coolpay/badge.svg?branch=master)](https://coveralls.io/github/emmpak/coolpay?branch=master)
 
+This is an app that uses [Coolpay](http://docs.coolpayapi.apiary.io/) API. Coolpay is a new company that allows to easily send money to friends through their API.
+
+### Tech
+Ruby, Sinatra, RSpec, Capybara, HTML, CSS
+
 ### Setup
 
 ###### Initial Steps
