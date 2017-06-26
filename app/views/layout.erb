@@ -4,12 +4,13 @@
     <meta charset="utf-8" />
     <title>Coolpay</title>
     <link rel="stylesheet" type='text/css' href='/main.css' />
-    <!-- <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet"> -->
   </head>
   <body>
-    <% if token %>
-      <p>Hello Emil.</p>
-    <% end %>
-    <%= yield %>
+    <div class='rowSec'>
+      <% if token %>
+        <div class='col-12'><p>Hello Emil.</p></div>
+      <% end %>
+      <%= yield %>
+  </div>
   </body>
 </html>

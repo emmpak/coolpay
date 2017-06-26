@@ -1,36 +1,42 @@
-<div id='payments-container'>
-  <% @payments.each do |payment| %>
-    <div class='payment'>
-      <div class='status'> Status: <%= payment['status'] %> </div>
-      <div class='amount'> Amount: <%= payment['amount'] %> </div>
-      <div class='currency'> <%= payment['currency'] %> </div>
-      <div class='reference-id'> Reference ID: <%= payment['id'] %> </div>
-    </div>
-  <% end %>
-</div
-
-<div id='add_recipient'>
-  <form action='/recipients' method='post'>
-    <label for='recipient'>Recipient Name
-      <input type='text' name='recipient' id='recipient'/>
-    </label>
-      <input type='submit' value='Add Recipient'  />
-  </form>
-</div>
-
-<div id='recipients-container'>
-  <% @recipients.each_with_index do |recipient, index| %>
-    <div class='recipient'> <%= recipient['name'] %> </div>
-    <form action='/payments' method='post' name="paymentform" id="paymentform-<%= index %>">
-      <input type="hidden" name="id" value="<%= recipient['id'] %>">
-      <label for='amount'>Amount
-        <input type='number' name='amount' required/>
+  <div id='add_recipient'class='col-12'>
+    <form action='/recipients' method='post'>
+      <label for='recipient'>Recipient Name
+        <input type='text' name='recipient' id='recipient'/>
       </label>
-      <select name="currency" required>
-        <option value="GBP">GBP</option>
-        <option value="USD">USD</option>
-      </select>
-      <input type='submit' value='Send coins' />
+      <input type='submit' value='Add Recipient'  />
     </form>
-  <% end %>
-</div>
+  </div>
+
+  <div id='payments-container' class='col-8'>
+    <h3>Payment Histroy</h3>
+    <% @payments.each do |payment| %>
+      <div class='payment'>
+        <div class='status col-6'> Status: <%= payment['status'] %> </div>
+        <div class='amount col-6'> Amount: <%= payment['amount'] %> <%= payment['currency'] %> </div>
+        <div class='reference-id col-12'> Reference ID: <%= payment['id'] %> </div>
+      </div>
+    <% end %>
+  </div>
+
+
+    <div class='col-4'>
+      <h3>Previous Payees</h3>
+      <div id='recipients-history'>
+      <% @recipients.reverse.each_with_index do |recipient, index| %>
+        <div class='recipient col-8'> <%= recipient['name'] %> </div>
+        <div class='col-8'>
+          <form action='/payments' method='post' name="paymentform" id="paymentform-<%= index %>">
+            <input type="hidden" name="id" value="<%= recipient['id'] %>">
+            <label for='amount'>Amount
+              <input type='number' name='amount' required/>
+            </label>
+            <select name="currency" required>
+              <option value="GBP">GBP</option>
+              <option value="USD">USD</option>
+            </select>
+            <input type='submit' value='Send coins' />
+          </form>
+        </div>
+      <% end %>
+    </div>
+    </div>
